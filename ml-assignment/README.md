@@ -1,11 +1,38 @@
-# Trigram Language Model
+# Trigram Model — Quick Start
 
-This directory contains the core assignment files for the Trigram Language Model.
+Prerequisites
+- Python 3.8+
+- (optional) virtual environment
 
-## How to Run 
+Install dependencies
+```powershell
+# from workspace root (Windows PowerShell)
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
 
-    # Instructions on how to run. (filled by you)
+Run tests
+- Recommended: run tests from the package root so `src` imports resolve automatically:
+```powershell
+cd ml-assignment
+python -m pytest -q
+```
 
-## Design Choices
+- Alternative: run from workspace root by setting PYTHONPATH:
+```powershell
+$env:PYTHONPATH = "$PWD\ml-assignment"
+python -m pytest ml-assignment/tests/test_ngram.py -q
+```
 
-Please document your design choices in the `evaluation.md` file. This should be a 1-page summary of the decisions you made and why you made them.
+Example usage (interactive)
+```python
+from src.ngram_model import TrigramModel
+m = TrigramModel()
+m.fit("I am a test sentence. This is another test sentence.")
+print(m.generate())   # stochastic output
+```
+
+Notes
+- The model is a trigram implementation (N=3). Generation is probabilistic and therefore non‑deterministic unless you control the global random seed.
+- See evaluation.md for design decisions and testing instructions.
